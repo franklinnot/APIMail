@@ -1,9 +1,5 @@
 import os
-from dotenv import load_dotenv
 from pydantic import BaseModel
-
-# cargar variables de entorno
-load_dotenv()
 
 
 class Respuesta(BaseModel):

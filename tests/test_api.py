@@ -16,10 +16,10 @@ def load_json_data():
         with open(PAYLOAD_FILE, "r") as f:
             return json.load(f)
     except FileNotFoundError:
-        print(f"❌ Archivo '{PAYLOAD_FILE}' no encontrado.")
+        print(f"Archivo '{PAYLOAD_FILE}' no encontrado.")
         sys.exit(1)
     except json.JSONDecodeError:
-        print(f"❌ El archivo '{PAYLOAD_FILE}' no es un JSON válido.")
+        print(f"El archivo '{PAYLOAD_FILE}' no es un JSON válido.")
         sys.exit(1)
 
 
@@ -39,7 +39,7 @@ def test_api():
 
     # permitir cambiar solo el email en cada prueba
     try:
-        email_destino = input("➡️ Ingresa el email de destino: ").strip()
+        email_destino = input("Ingresa el email de destino: ").strip()
         if email_destino:
             payload["email"] = email_destino
     except EOFError:
@@ -51,19 +51,19 @@ def test_api():
 
     # asegurar b64 válido
     if not payload.get("b64"):
-        print("⚠️ Payload sin 'b64', se genera dummy.")
+        print("Payload sin 'b64', se genera dummy.")
         payload["b64"] = get_dummy_b64()
 
-    print(f"\n➡️ Enviando payload a {URL} ...")
+    print(f"\nEnviando payload a {URL} ...")
     print(json.dumps(payload, indent=2)[:500], "...")  # muestra solo inicio
 
     try:
         response = requests.post(URL, json=payload, timeout=15)
     except requests.exceptions.ConnectionError:
-        print("❌ API no disponible. Verifica que esté corriendo.")
+        print("API no disponible. Verifica que esté corriendo.")
         return
     except requests.exceptions.RequestException as e:
-        print(f"❌ Error en la solicitud: {e}")
+        print(f"Error en la solicitud: {e}")
         return
 
     print(f"\nCódigo de estado: {response.status_code}")

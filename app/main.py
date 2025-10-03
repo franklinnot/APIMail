@@ -1,10 +1,15 @@
 ﻿from fastapi import FastAPI
+from dotenv import load_dotenv
 from .dtos import Notificacion
 from .classes import Respuesta
-from .utils import enviar_correo
+from .correo_service import enviar_correo
+
 
 # cd app
 # fastapi dev main.py
+
+# cargar variables de entorno
+load_dotenv()
 
 app = FastAPI(
     title="API de correos de BeatAI",
